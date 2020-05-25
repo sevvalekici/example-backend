@@ -35,5 +35,10 @@ restaurantSchema.virtual('menus', {
   localField: '_id',
   foreignField: 'restaurant'
 })
+restaurantSchema.virtual('orders', {
+  ref: 'Order',
+  localField: '_id',
+  foreignField: 'restaurant'
+})
 
 module.exports = mongoose.model('Restaurant', restaurantSchema);

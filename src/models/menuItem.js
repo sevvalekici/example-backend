@@ -10,6 +10,12 @@ const itemSchema = new mongoose.Schema({
     ref: 'Menu',
     //required: true
   },
+  removelist:[{
+        type: String,
+  }],
+  additionlist:[{
+        type: String,
+  }],
   description: {
     type: String,
   },

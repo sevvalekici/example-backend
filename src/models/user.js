@@ -42,14 +42,34 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    city: {
-        type: String,
-        default: 'İstanbul'
-    },
-    district: {
-        type: String,
-        default: 'Maslak'
-    },
+    addresses: [
+        {
+            title: {
+                type: String
+            },
+            address: {
+                type: String,
+                maxlength: 350
+            },
+            addressType: {
+                type: String,
+                enum : ['ev','kampus', 'isyeri'], 
+                default: 'ev' 
+            },
+            city: {
+                type: String,
+                default: 'İstanbul'
+            },
+            district: {
+                type: String,
+                default: 'Maslak'
+            },
+            isSelected: {
+                type: Boolean,
+                default: false
+            }
+        }
+    ],
     role: {
         type: String, 
         enum : ['user','restOwner', 'midUser'], 
@@ -75,7 +95,6 @@ userSchema.methods.toJSON = function () {
 
     delete userObject.password
     delete userObject.tokens
-    //delete userObject.avatar
 
     return userObject
 }
@@ -120,7 +139,7 @@ userSchema.pre('save', async function (next) {
 // Delete user tasks when user is removed
 userSchema.pre('remove', async function (next) {
     const user = this
-    //await Order.deleteMany({ owner: user._id }) tarzı şeyler
+    await Order.deleteMany({ owner: user._id })
     next()
 })
 

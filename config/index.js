@@ -10,6 +10,9 @@ const config = {
     },
     database: {
       url: process.env.MONGODB_URL,
+    },
+    emailAPI: {
+      key: process.env.SENDGRID_API_KEY
     }
   }
 
